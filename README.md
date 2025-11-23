@@ -169,6 +169,25 @@ And visualising the data based on it's decomposition builds and understanding of
 * Half Life - peroid of time for the EW to reduce to half
 * Alpha - specifies teh smoothing factor directly
 
+# ARIMA
+Using either Auto Regressive OR Moving Average<b>
+AR - p - Use when autocorrelation plot shows positive acutocorrelation at the first lag (lag-1)<b>
+I <b>
+MA - q - Use when autocorrelation plot shows negative acutocorrelation at the 1st lag<b>
+
+p: The number of lag observations included in the model<b>
+d: The number of times that the raw observations are differenced<b>
+q: The size of the moving average window, also called the order of miving averages<b>
+
+
+## Partial Autocorrelation
+The correlation between two variables under the assumption that we know and take into account the values of some other set of variables<b>
+* A sharp drop after lag "k" suggests an AR-k model should be used<b>
+* If there is a gradual declien, it suggests an MA model should be used<b>
+
+Identification of an AR model is often best done with the PACF<b>
+Identification of an MA model is often best done with the ACF rather than a PACF<b>
+
 
 
 
