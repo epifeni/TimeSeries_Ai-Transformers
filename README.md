@@ -153,7 +153,17 @@ from datetime import datetime
 dt = datetime.strptime('24/03/21 15:48', '%d/%m/%y %H:%M')
 ```
 
+# ETS Time Series Decomposition
+Method for breaks down the into components: <b>
+Error - what's not explained by the trend or seasonality <b>
+Trend - <b>
+Seasonality - <b>
+<b>
+And visualising the data based on it's decomposition builds and understanding of its behaviour<b>
 
+# EWMA Exponentially Weighted Moving Average
+* EWMA is an improvement on the simple moving average
+* Removes the lag effect of a simple moving average and applies more weight to the more recent values
 
 
 
