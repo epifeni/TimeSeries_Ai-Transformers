@@ -123,3 +123,24 @@ env/
 
 # Logs
 logs/
+
+# Secrets and credentials (NEVER commit these!)
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.ppk
+*.p12
+*.pfx
+secrets.json
+credentials.json
+config/secrets.yml
+config/credentials.yml
+.aws/credentials
+.gcp/credentials.json
+*secret*
+*password*
+*token*
+*.crt
+*.cer
