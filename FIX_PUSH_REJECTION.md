@@ -207,9 +207,14 @@ git push origin main --force-with-lease
 # Install git filter-repo first: pip install git-filter-repo
 
 # Create a secure temporary file with the secret to remove
+# IMPORTANT: Don't type the actual secret in the command line
+# Instead, use an editor to avoid shell history
 SECRETS_FILE=$(mktemp)
 chmod 600 "$SECRETS_FILE"  # Secure permissions
-echo "hf_abc123xyz456..." > "$SECRETS_FILE"
+
+# Open the file in an editor and add the secret, then save
+# Example content: hf_abc123xyz456...==***REMOVED***
+nano "$SECRETS_FILE"  # or vim, or any editor
 
 # Remove the secret from all history
 git filter-repo --replace-text "$SECRETS_FILE" --force
@@ -276,12 +281,11 @@ load_dotenv()
 token = os.environ.get('HUGGINGFACE_TOKEN')
 ```
 
-Add `.env` to your `.gitignore`:
+The `.gitignore` file from this repository already includes `.env` and other secret patterns. Make sure your repository has these patterns:
 
 ```bash
-echo ".env" >> .gitignore
-git add .gitignore
-git commit -m "Add .env to gitignore"
+# Verify .gitignore includes secret patterns
+grep -E "^\.env$|^\.env\.\*$" .gitignore || echo "Add .env patterns to .gitignore"
 ```
 
 ## Troubleshooting
