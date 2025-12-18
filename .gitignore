@@ -139,8 +139,14 @@ config/secrets.yml
 config/credentials.yml
 .aws/credentials
 .gcp/credentials.json
-*secret*
-*password*
-*token*
+secret_*
+*_secret
+*_secret.*
+password_*
+*_password
+*_password.*
+token_*
+*_token
+*_token.*
 *.crt
 *.cer

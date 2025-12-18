@@ -188,6 +188,8 @@ token = "YOUR_HUGGINGFACE_TOKEN_HERE"
 
 ### Step 3: Remove Secret from Git History
 
+**Important:** We use `--force-with-lease` instead of `--force` for safety. It prevents overwriting changes others may have pushed.
+
 **Option A: Amend the last commit (if secret is in the most recent commit):**
 
 ```bash
@@ -195,7 +197,7 @@ token = "YOUR_HUGGINGFACE_TOKEN_HERE"
 # Then amend the commit
 git add Transformers_NeuralNetworks/13_MLOps.ipynb
 git commit --amend --no-edit
-git push origin main --force
+git push origin main --force-with-lease
 ```
 
 **Option B: Rewrite history (if secret is in older commits):**
@@ -204,14 +206,19 @@ git push origin main --force
 # Use BFG Repo-Cleaner or git filter-repo
 # Install git filter-repo first: pip install git-filter-repo
 
-# Create a file with the secret to remove
-echo "hf_abc123xyz456..." > /tmp/secrets.txt
+# Create a secure temporary file with the secret to remove
+SECRETS_FILE=$(mktemp)
+chmod 600 "$SECRETS_FILE"  # Secure permissions
+echo "hf_abc123xyz456..." > "$SECRETS_FILE"
 
 # Remove the secret from all history
-git filter-repo --replace-text /tmp/secrets.txt --force
+git filter-repo --replace-text "$SECRETS_FILE" --force
 
-# Force push to update remote
-git push origin main --force
+# Clean up
+rm -f "$SECRETS_FILE"
+
+# Force push with lease (safer than --force)
+git push origin main --force-with-lease
 ```
 
 **Option C: Interactive rebase (for few commits):**
@@ -232,8 +239,8 @@ git add Transformers_NeuralNetworks/13_MLOps.ipynb
 git commit --amend --no-edit
 git rebase --continue
 
-# Force push
-git push origin main --force
+# Force push with lease (safer than --force)
+git push origin main --force-with-lease
 ```
 
 ### Step 4: Revoke the Exposed Secret
