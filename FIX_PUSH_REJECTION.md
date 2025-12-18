@@ -31,8 +31,12 @@ cd /path/to/Regression_ML_DL_Stats
 Create a `.gitignore` file in the root of your repository with the following content (or copy the `.gitignore` file from the TimeSeries_Ai-Transformers repository):
 
 ```bash
-# Copy from this repository
+# Copy the .gitignore file from this repository after this PR is merged
+# Option 1: Download from the PR branch (temporary)
 curl -o .gitignore https://raw.githubusercontent.com/epifeni/TimeSeries_Ai-Transformers/copilot/fix-push-declined-error/.gitignore
+
+# Option 2: After PR is merged, download from main branch
+# curl -o .gitignore https://raw.githubusercontent.com/epifeni/TimeSeries_Ai-Transformers/main/.gitignore
 ```
 
 Or create it manually with the comprehensive template that includes:
@@ -103,9 +107,14 @@ After pushing, verify that:
 
 The `.gitignore` file will automatically prevent system files from being committed in the future. However, if you're on macOS, you can also:
 
-1. **Prevent .DS_Store creation globally** (optional):
+1. **Prevent .DS_Store creation on network volumes** (optional):
    ```bash
    defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+   ```
+   
+   For local directories as well:
+   ```bash
+   defaults write com.apple.desktopservices DSDontWriteStores true
    ```
 
 2. **Delete existing .DS_Store files from your file system** (optional):
